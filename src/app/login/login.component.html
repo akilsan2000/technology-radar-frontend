@@ -1,0 +1,17 @@
+<h1>Login</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="form-vertical">
+  <mat-form-field appearance="fill">
+    <mat-label>Benutzername</mat-label>
+    <input matInput id="username" formControlName="username" required>
+    <mat-error *ngIf="loginForm.controls?.['username']?.errors?.['required']">{{'Benutzername wird benötigt'}}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Passwort</mat-label>
+    <input matInput id="password" formControlName="password" type="password" required>
+    <mat-error *ngIf="loginForm.controls?.['password']?.errors?.['required']">{{'Passwort wird benötigt'}}</mat-error>
+  </mat-form-field>
+
+  <button type="button" mat-raised-button color="primary" type="submit">
+    Anmelden
+  </button>
+</form>

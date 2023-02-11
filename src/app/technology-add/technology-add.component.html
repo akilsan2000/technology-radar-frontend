@@ -1,0 +1,45 @@
+<h1>Technologie hinzufügen</h1>
+
+
+<button type="button" (click)="goBack()" mat-raised-button color="primary">Zurück</button>
+
+<form [formGroup]="technologyAddForm" (ngSubmit)="onSubmit(technologyAddForm.value)" class="form-vertical">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput id="name" formControlName="name" required>
+    <mat-error *ngIf="technologyAddForm.controls?.['name']?.errors?.['required']">{{'Name wird benötigt'}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Kategorie</mat-label>
+    <mat-select id="category" formControlName="category" required>
+      <mat-option value="techniques">Techniques</mat-option>
+      <mat-option value="platforms">Platforms</mat-option>
+      <mat-option value="tools">Tools</mat-option>
+      <mat-option value="languages">Languages & Frameworks</mat-option>
+    </mat-select>
+    <mat-error *ngIf="technologyAddForm.controls?.['category']?.errors?.['required']">{{'Kategorie wird benötigt'}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Ring</mat-label>
+    <mat-select id="ring" formControlName="ring">
+      <mat-option value="assess">Assess</mat-option>
+      <mat-option value="trial">Trial</mat-option>
+      <mat-option value="adopt">Adopt</mat-option>
+      <mat-option value="hold">Hold</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Beschreibung</mat-label>
+    <textarea matInput id="technologyDescription" formControlName="technologyDescription" required></textarea>
+    <mat-error *ngIf="technologyAddForm.controls?.['technologyDescription']?.errors?.['required']">{{'Beschreibung wird benötigt'}}</mat-error>
+  </mat-form-field>
+
+  <button type="button" mat-raised-button color="primary" type="submit">
+    Hinzufügen
+  </button>
+</form>
+
