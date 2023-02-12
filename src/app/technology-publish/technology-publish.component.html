@@ -1,13 +1,13 @@
-<h1>Technologie hinzufügen</h1>
+<h1>Technologie veröffentlichen</h1>
 
 
 <button type="button" (click)="goBack()" mat-raised-button color="primary">Zurück</button>
 
-<form [formGroup]="technologyAddForm" (ngSubmit)="onSubmit(technologyAddForm.value)" class="form-vertical">
+<form [formGroup]="technologyPublishForm" (ngSubmit)="onSubmit(technologyPublishForm.value)" class="form-vertical">
   <mat-form-field appearance="fill">
     <mat-label>Name</mat-label>
     <input matInput id="name" formControlName="name" required>
-    <mat-error *ngIf="technologyAddForm.controls['name']?.errors?.['required']">{{'Name wird benötigt'}}</mat-error>
+    <mat-error *ngIf="technologyPublishForm.controls['name']?.errors?.['required']">{{'Name wird benötigt'}}</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -18,7 +18,7 @@
       <mat-option value="tools">Tools</mat-option>
       <mat-option value="languages">Languages & Frameworks</mat-option>
     </mat-select>
-    <mat-error *ngIf="technologyAddForm.controls['category']?.errors?.['required']">{{'Kategorie wird benötigt'}}</mat-error>
+    <mat-error *ngIf="technologyPublishForm.controls['category']?.errors?.['required']">{{'Kategorie wird benötigt'}}</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -29,17 +29,25 @@
       <mat-option value="adopt">Adopt</mat-option>
       <mat-option value="hold">Hold</mat-option>
     </mat-select>
+    <mat-error *ngIf="technologyPublishForm.controls['ring']?.errors?.['required']">{{'Ring wird benötigt'}}</mat-error>
   </mat-form-field>
 
 
   <mat-form-field appearance="fill">
-    <mat-label>Beschreibung</mat-label>
+    <mat-label>Beschreibung Technologie</mat-label>
     <textarea matInput id="technologyDescription" formControlName="technologyDescription" required></textarea>
-    <mat-error *ngIf="technologyAddForm.controls['technologyDescription']?.errors?.['required']">{{'Beschreibung wird benötigt'}}</mat-error>
+    <mat-error *ngIf="technologyPublishForm.controls['technologyDescription']?.errors?.['required']">{{'Beschreibung wird benötigt'}}</mat-error>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Beschreibung der Einordnung</mat-label>
+    <textarea matInput id="classificationDescription" formControlName="classificationDescription"></textarea>
+    <mat-error *ngIf="technologyPublishForm.controls['classificationDescription']?.errors?.['required']">{{'Beschreibung wird benötigt'}}</mat-error>
   </mat-form-field>
 
   <button type="button" mat-raised-button color="primary" type="submit">
-    Hinzufügen
+    Veröffentlichen
   </button>
 </form>
 

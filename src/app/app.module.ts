@@ -17,6 +17,9 @@ import { TechnologyViewerComponent } from './technology-viewer/technology-viewer
 import { LoginComponent } from './login/login.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { JwtInterceptor } from './_helpers';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { TechnologyEditComponent } from './technology-edit/technology-edit.component';
+import { TechnologyPublishComponent } from './technology-publish/technology-publish.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { JwtInterceptor } from './_helpers';
     TechnologyAddComponent,
     TechnologyViewerComponent,
     LoginComponent,
-    AdministrationComponent
+    AdministrationComponent,
+    TechnologyEditComponent,
+    TechnologyPublishComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,8 @@ import { JwtInterceptor } from './_helpers';
     MatToolbarModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

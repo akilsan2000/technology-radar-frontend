@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Role } from '../_models';
 import { AuthService } from '../_services';
 
 @Component({
@@ -36,7 +37,7 @@ export class LoginComponent {
     this.authService
       .login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)
       .subscribe(response => {
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || (this.authService.userValue?.role==Role.CTO ? '/administration' : '/');
         this.router.navigateByUrl(returnUrl);
       });
 

@@ -26,7 +26,7 @@ export class TechnologyService {
       .pipe(catchError(this.errorHandler.handleError<Technology[]>('getTechnologies', [])));
   }
 
-  getTechnology(id: number): Observable<Technology> {
+  getTechnology(id: string): Observable<Technology> {
     const url = `${this.technologyUrl}/${id}`;
     return this.http
       .get<Technology>(url)
@@ -37,5 +37,17 @@ export class TechnologyService {
     return this.http
       .post<Technology>(this.technologyUrl, technology, this.httpOptions)
       .pipe(catchError(this.errorHandler.handleError<Technology>('addTechnology')));
+  }
+
+  updateTechnology(id:string, technology: Technology): Observable<Technology> {
+    return this.http
+      .put<Technology>(`${this.technologyUrl}/${id}`, technology, this.httpOptions)
+      .pipe(catchError(this.errorHandler.handleError<Technology>('updateTechnology')));
+  }
+
+  deleteTechnology(id: string): Observable<Technology> {
+    return this.http
+      .delete<Technology>(`${this.technologyUrl}/${id}`, this.httpOptions)
+      .pipe(catchError(this.errorHandler.handleError<Technology>('updateTechnology')));
   }
 }

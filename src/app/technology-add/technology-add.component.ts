@@ -3,6 +3,7 @@ import { Technology } from '../_models';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { TechnologyService } from '../_services';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class TechnologyAddComponent {
   constructor(
     private formBuilder: FormBuilder,
     private technologyService: TechnologyService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) { }
 
 
@@ -38,6 +40,7 @@ export class TechnologyAddComponent {
     this.technologyService.addTechnology(data as Technology)
       .subscribe(technology => {
         console.log("added");
+        this.router.navigate(['/administration']);
       });
   }
 
