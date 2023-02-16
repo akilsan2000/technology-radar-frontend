@@ -1,17 +1,31 @@
-<h1>Login</h1>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="form-vertical">
-  <mat-form-field appearance="fill">
-    <mat-label>Benutzername</mat-label>
-    <input matInput id="username" formControlName="username" required>
-    <mat-error *ngIf="loginForm.controls['username']?.errors?.['required']">{{'Benutzername wird benötigt'}}</mat-error>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Passwort</mat-label>
-    <input matInput id="password" formControlName="password" type="password" required>
-    <mat-error *ngIf="loginForm.controls['password']?.errors?.['required']">{{'Passwort wird benötigt'}}</mat-error>
-  </mat-form-field>
+<div class="container ">
+  <mat-card>
+    <mat-card-content>
+      <h1>Login</h1>
 
-  <button type="button" mat-raised-button color="primary" type="submit">
-    Anmelden
-  </button>
-</form>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="form-vertical">
+        <mat-form-field appearance="fill">
+          <mat-label>Benutzername</mat-label>
+          <input matInput id="username" formControlName="username" required>
+          <mat-error *ngIf="loginForm.controls['username']?.errors?.['required']">{{'Benutzername wird benötigt'}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Passwort</mat-label>
+          <input matInput id="password" formControlName="password" [type]="hide ? 'password' : 'text'" required>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.controls['password']?.errors?.['required']">{{'Passwort wird benötigt'}}</mat-error>
+        </mat-form-field>
+
+        <mat-error *ngIf="loginInValid">
+          Benutzername oder Passwort falsch
+        </mat-error>
+
+        <button type="button" mat-raised-button color="primary" type="submit">
+          Anmelden
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

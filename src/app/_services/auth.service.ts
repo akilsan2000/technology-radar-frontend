@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { GlobalConstants } from '../global-constants';
-import { ErrorHandler } from '../_helpers/errorhandler';
+import { ErrorHandler } from '../_helpers';
 import { User } from '../_models';
 
 @Injectable({
@@ -42,8 +42,7 @@ export class AuthService {
           localStorage.setItem('user', JSON.stringify(data.user));
           this.userSubject.next(data.user);
           return data.user;
-        }),
-        catchError(this.errorHandler.handleError<User>('login'))
+        })
       );
   }
 

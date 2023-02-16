@@ -2,6 +2,21 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 .form-vertical {
   display: flex; flex-direction: column;
+}
+
+.full-size {
+  height: 100%;
+  width: 100%;
+}
+
+.custom-button-row button,
+.custom-button-row a {
+  margin-right: 8px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
 }

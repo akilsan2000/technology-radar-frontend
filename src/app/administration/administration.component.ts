@@ -16,11 +16,9 @@ export class AdministrationComponent {
   ) { }
 
   ngOnInit(){
-
     this.technologyService.getTechnologies()
       .subscribe(technologies => {
         this.technologies = technologies;
-        this.technologies.map(technology => { if(technology.publishDate) {technology.publishDate = new Date(technology.publishDate)}});
       });
   }
 

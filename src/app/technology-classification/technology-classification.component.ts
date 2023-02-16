@@ -2,23 +2,20 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Technology } from '../_models';
 import { TechnologyService } from '../_services';
 
 @Component({
-  selector: 'app-technology-publish',
-  templateUrl: './technology-publish.component.html',
-  styleUrls: ['./technology-publish.component.scss']
+  selector: 'app-technology-classification',
+  templateUrl: './technology-classification.component.html',
+  styleUrls: ['./technology-classification.component.scss']
 })
-export class TechnologyPublishComponent {
-  technologyPublishForm: FormGroup = this.formBuilder.group({
-    name: ['', Validators.required],
-    category: ['', Validators.required],
+export class TechnologyClassificationComponent {
+  technologyEditForm: FormGroup = this.formBuilder.group({
     ring: ['', Validators.required],
-    technologyDescription: ['', Validators.required],
     classificationDescription: ['', Validators.required]
   });
   submitted:boolean=false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,14 +26,10 @@ export class TechnologyPublishComponent {
   ) { }
 
   ngOnInit(){
-
     this.technologyService.getTechnology(this.route.snapshot.paramMap.get('id')||'')
       .subscribe(technology => {
-        this.technologyPublishForm.setValue({
-          name: technology.name||'',
-          category: technology.category||'',
+        this.technologyEditForm.setValue({
           ring: technology.ring||'',
-          technologyDescription: technology.technologyDescription||'',
           classificationDescription: technology.classificationDescription||''
         });
       });
@@ -45,14 +38,14 @@ export class TechnologyPublishComponent {
 
   onSubmit(data: any){
     this.submitted = true;
-    if(this.technologyPublishForm.invalid){
+    if(this.technologyEditForm.invalid){
       return;
     }
     console.log("Submit: ", data);
 
-    this.technologyService.updateTechnology(this.route.snapshot.paramMap.get('id') || '', {...data, isPublished: true} as Technology)
+    this.technologyService.patchTechnology(this.route.snapshot.paramMap.get('id') || '',data)
       .subscribe(() => {
-        console.log("published");
+        console.log("edited");
         this.router.navigate(['/administration']);
       });
   }
@@ -60,5 +53,4 @@ export class TechnologyPublishComponent {
   goBack(): void {
     this.location.back();
   }
-
 }

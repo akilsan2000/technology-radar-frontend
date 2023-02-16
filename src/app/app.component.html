@@ -1,9 +1,11 @@
-<!-- <h1>{{title}}</h1> -->
 <nav>
   <mat-toolbar color="primary" *ngIf="user">
-    <a routerLink="/technology-viewer" mat-button>Technologie Radar Viewer</a>
-    <a routerLink="/administration" *ngIf="isAdmin" mat-button>Administration</a>
-    <a (click)="logout()" *ngIf="user" mat-button>Logout</a>
+    <a routerLink="/technology-viewer" *ngIf="!isAdmin" mat-button>Technologie Radar</a>
+    <a routerLink="/administration" *ngIf="isAdmin" mat-button>Technologie Radar</a>
+    <span class="nav-spacer"></span>
+    <a (click)="logout()" *ngIf="user" style="float:right" mat-button><mat-icon>logout</mat-icon> Logout</a>
   </mat-toolbar>
 </nav>
-<router-outlet></router-outlet>
+<div class="main-container">
+  <router-outlet></router-outlet>
+</div>

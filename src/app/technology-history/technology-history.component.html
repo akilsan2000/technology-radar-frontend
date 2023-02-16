@@ -1,0 +1,44 @@
+<h1>Änderungsverlauf</h1>
+<table mat-table [dataSource]="technology.history || []" multiTemplateDataRows class="">
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef> Benutzer </th>
+    <td mat-cell *matCellDef="let element"> {{element.lastModifiedBy || element.createdBy}} </td>
+  </ng-container>
+  <ng-container matColumnDef="datetime">
+    <th mat-header-cell *matHeaderCellDef> Zeitpunkt </th>
+    <td mat-cell *matCellDef="let element"> {{element.lastModifiedDate?.toLocaleString() || element.createdDate.toLocaleString()}} </td>
+  </ng-container>
+  <ng-container matColumnDef="expand">
+    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+    <td mat-cell *matCellDef="let element" class="example-element-expand">
+      <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+        <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+        <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsWithExpand.length">
+      <div class="example-element-detail"
+            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <h3>{{technology.name}}</h3>
+            <p>Kategory: {{element.category}}</p>
+            <p>Ring: {{element.ring}}</p>
+            <p>Beschreibung der Technology: {{element.technologyDescription}}</p>
+            <p>Beschreibung: {{element.classificationDescription}}</p>
+            <p>Erstellt: {{element.createdBy}} - {{element.createdDate?.toLocaleString()}}</p>
+            <p *ngIf="element.lastModifiedDate">Zuletzt geändert: {{element.lastModifiedBy}} - {{element.lastModifiedDate?.toLocaleString()}}</p>
+            <p *ngIf="element.isPublished">Publiziert: {{element.publishDate?.toLocaleString()}}</p>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsWithExpand"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsWithExpand;"
+    class="example-element-row"
+    [class.example-expanded-row]="expandedElement === row"
+    (click)="expandedElement = expandedElement === row ? null : row">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>

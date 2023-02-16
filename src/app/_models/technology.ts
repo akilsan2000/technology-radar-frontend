@@ -7,4 +7,9 @@ export interface Technology {
   classificationDescription?: string;
   isPublished?: boolean;
   publishDate?: Date;
+  lastModifiedBy?: string;
+  lastModifiedDate?: Date;
+  createdBy?: string;
+  createdDate?: Date;
+  history?: Technology[];
 }

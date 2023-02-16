@@ -14,7 +14,8 @@ export class LoginComponent {
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
-  submitted:boolean=false;
+  loginInValid: boolean = false;
+  hide: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,7 +29,7 @@ export class LoginComponent {
   }
 
   onSubmit(data: any){
-    this.submitted = true;
+    this.loginInValid = false;
     if(this.loginForm.invalid){
       return;
     }
@@ -36,9 +37,15 @@ export class LoginComponent {
 
     this.authService
       .login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)
-      .subscribe(response => {
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || (this.authService.userValue?.role==Role.CTO ? '/administration' : '/');
-        this.router.navigateByUrl(returnUrl);
+      .subscribe({
+        next : response => {
+          this.loginInValid = false;
+          const returnUrl = this.authService.userValue?.role==Role.CTO ? '/administration' : '/';
+          this.router.navigateByUrl(returnUrl);
+        },
+        error: e => {
+          this.loginInValid = true;
+        }
       });
 
   }

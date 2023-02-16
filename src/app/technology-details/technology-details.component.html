@@ -1,0 +1,30 @@
+<h1>Details</h1>
+<button type="button" (click)="goBack()" mat-raised-button color="primary">Zurück</button>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <mat-card class="full-size">
+      <mat-card-header>
+        <mat-card-title>{{technology.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Kategory: {{technology.category}}</p>
+        <p>Ring: {{technology.ring}}</p>
+        <p>Beschreibung der Technology: {{technology.technologyDescription}}</p>
+        <p>Beschreibung der Einordnung: {{technology.classificationDescription}}</p>
+        <p>Erstellt: {{technology.createdBy}} - {{technology.createdDate?.toLocaleString()}}</p>
+        <p *ngIf="technology.lastModifiedDate">Zuletzt geändert: {{technology.lastModifiedBy}} - {{technology.lastModifiedDate.toLocaleString()}}</p>
+        <p *ngIf="technology.isPublished">Veröffentlicht: {{technology.publishDate?.toLocaleString()}}</p>
+        <mat-divider></mat-divider>
+      </mat-card-content>
+      <mat-card-actions class="custom-button-row">
+        <a routerLink="/technology-edit/{{technology.id}}" mat-raised-button color="primary">Bearbeiten</a>
+        <a routerLink="/technology-publish/{{technology.id}}" *ngIf="!technology.isPublished" mat-raised-button color="accent">Veröffentlichen</a>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <app-technology-history [technology]="technology" class="full-size"></app-technology-history>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
