@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { TechnologyService } from '../_services';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { GlobalConstants } from '../global-constants';
 
 
 @Component({
@@ -19,6 +20,9 @@ export class TechnologyAddComponent {
     technologyDescription: ['', Validators.required]
   });
   submitted:boolean=false;
+
+  availableCategories: {text: string, value: string}[] = GlobalConstants.technologyCategories;
+  availableRingTypes: {text: string, value: string}[] = GlobalConstants.technologyRingTypes;
 
   // technology: Technology;
 

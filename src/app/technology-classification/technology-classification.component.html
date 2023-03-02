@@ -7,10 +7,9 @@
   <mat-form-field appearance="fill">
     <mat-label>Ring</mat-label>
     <mat-select id="ring" formControlName="ring">
-      <mat-option value="assess">Assess</mat-option>
-      <mat-option value="trial">Trial</mat-option>
-      <mat-option value="adopt">Adopt</mat-option>
-      <mat-option value="hold">Hold</mat-option>
+      <mat-option *ngFor="let option of availableRingTypes" [value]="option.value">
+        {{option.text}}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 

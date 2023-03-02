@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalConstants } from '../global-constants';
 import { Technology } from '../_models';
 import { TechnologyService } from '../_services';
 
@@ -19,6 +20,9 @@ export class TechnologyPublishComponent {
     classificationDescription: ['', Validators.required]
   });
   submitted:boolean=false;
+
+  availableCategories: {text: string, value: string}[] = GlobalConstants.technologyCategories;
+  availableRingTypes: {text: string, value: string}[] = GlobalConstants.technologyRingTypes;
 
   constructor(
     private formBuilder: FormBuilder,

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TechnologyService } from '../_services';
+import { GlobalConstants } from '../global-constants';
 
 @Component({
   selector: 'app-technology-classification',
@@ -15,6 +16,9 @@ export class TechnologyClassificationComponent {
     classificationDescription: ['', Validators.required]
   });
   submitted:boolean=false;
+
+  availableCategories: {text: string, value: string}[] = GlobalConstants.technologyCategories;
+  availableRingTypes: {text: string, value: string}[] = GlobalConstants.technologyRingTypes;
 
 
   constructor(

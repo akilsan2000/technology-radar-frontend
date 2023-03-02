@@ -18,6 +18,7 @@ export class TechnologyDetailsComponent {
     technologyDescription: '',
     classificationDescription: ''
   }
+  gridBreakpoint: number = 2;
 
   constructor(
     private technologyService: TechnologyService,
@@ -25,24 +26,26 @@ export class TechnologyDetailsComponent {
     private route: ActivatedRoute,
   ) { }
 
-  ngOnInit(){
-    this.technologyService.getTechnology(this.route.snapshot.paramMap.get('id')||'', true)
+  ngOnInit() {
+    this.gridBreakpoint = (window.innerWidth <= 900) ? 1 : 2;
+
+    this.technologyService.getTechnology(this.route.snapshot.paramMap.get('id') || '', true)
       .subscribe(technology => {
         this.technology = technology;
-        if(technology.lastModifiedDate){
+        if (technology.lastModifiedDate) {
           technology.lastModifiedDate = new Date(technology.lastModifiedDate);
         }
-        if(technology.createdDate){
+        if (technology.createdDate) {
           technology.createdDate = new Date(technology.createdDate);
         }
-        if(technology.publishDate){
+        if (technology.publishDate) {
           technology.publishDate = new Date(technology.publishDate);
         }
         technology.history?.map(change => {
-          if(change.lastModifiedDate){
+          if (change.lastModifiedDate) {
             change.lastModifiedDate = new Date(change.lastModifiedDate);
           }
-          if(change.createdDate){
+          if (change.createdDate) {
             change.createdDate = new Date(change.createdDate);
           }
         })
@@ -51,5 +54,9 @@ export class TechnologyDetailsComponent {
 
   goBack(): void {
     this.location.back();
+  }
+
+  onResize(event: any): void {
+    this.gridBreakpoint = (event.target.innerWidth <= 900) ? 1 : 2;
   }
 }

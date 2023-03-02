@@ -1,6 +1,6 @@
 <h1>Details</h1>
 <button type="button" (click)="goBack()" mat-raised-button color="primary">Zurück</button>
-<mat-grid-list cols="2" rowHeight="2:1">
+<mat-grid-list [cols]="gridBreakpoint" rowHeight="2:1" (window:resize)="onResize($event)">
   <mat-grid-tile>
     <mat-card class="full-size">
       <mat-card-header>
